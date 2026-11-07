@@ -74,7 +74,7 @@ def main():
     cands = candidatos(regs, a.limite)
     hoje = dt.date.today().isoformat()
     lin = [f"# Jardineiro — {hoje}", "",
-           f"- {len(arqs)} arquivos em {len({p.parent for p in arqs})} projetos · {len(regs)} registros",
+           f"- {len(arqs)} arquivo(s) em {len({p.parent for p in arqs})} projeto(s) · {len(regs)} registros",
            f"- **reincidência: {100 * n_rep / max(1, len(regs)):.0f}%** ({n_rep} registros em {len(rep)} grupos de 2+)",
            f"- grupos que atravessam projetos: {len(cruz)}",
            f"- candidatos a subir de degrau: {len(cands)}", "",
@@ -85,6 +85,8 @@ def main():
         lin += [f"{k}. **{g[0]['problema'][:100]}** — {vezes}× em {', '.join(projs)} · "
                 f"{NOME[atual]} → **{NOME[alvo]}**", f"   - {como}"]
     lin += ["", "## O erro mudou de casa (mesmo grupo em projetos diferentes)", ""]
+    if not cruz:
+        lin.append("- nenhum")
     for g in cruz[:10]:
         projs = sorted({Path(r["arquivo"]).parent.name for r in g})
         lin.append(f"- {g[0]['problema'][:110]} — {', '.join(projs)}")

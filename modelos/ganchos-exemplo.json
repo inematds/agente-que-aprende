@@ -1,0 +1,17 @@
+[
+ {
+  "id": "python-sem-3",
+  "ferramenta": "Bash",
+  "padrao": "(^|[;&|(]\\s*|\\bsudo\\s+|\\btimeout\\s+\\d+\\s+)python\\s+[\\w./-]+\\.py",
+  "mensagem": "Nesta máquina não existe `python`, só `python3` (`python: command not found` 3x). Use python3.",
+  "origem": "FALHAS de makeshorts e wifi (3x)"
+ },
+ {
+  "id": "gh-create-master",
+  "ferramenta": "Bash",
+  "padrao": "\\bgh\\s+repo\\s+create\\b.*--push",
+  "exceto": "git\\s+(init\\s+-b\\s+main|branch\\s+-M\\s+main)",
+  "mensagem": "`gh repo create --push` subiu o branch como master (git init sem -b main) e o GitHub Pages recusou. No mesmo comando: `git branch -M main` antes do create, ou `git init -b main`.",
+  "origem": "FALHAS de astra-5-prompts e gpt6-astra-tecnico (2x)"
+ }
+]

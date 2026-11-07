@@ -9,7 +9,7 @@ Instalar (settings.json do Claude Code):
   "hooks": {"PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command",
             "command": "python3 /caminho/agente-que-aprende/gancho.py"}]}]}
 Testar uma regra:  echo '{"tool_name":"Bash","tool_input":{"command":"pkill -f x"}}' | python3 gancho.py ; echo $?
-Regras extras: variável AQA_GANCHOS=/caminho/outro.json (soma às do kit)."""
+Regras extras: variável AQA_GANCHOS=/caminho/outro.json (soma às do kit). Exemplos prontos em modelos/ganchos-exemplo.json."""
 import json
 import os
 import re
@@ -33,6 +33,9 @@ def checar(evento, lista):
     ferr = evento.get("tool_name", "")
     ti = evento.get("tool_input") or {}
     alvo = ti.get("command") or ti.get("file_path") or ""
+    if ferr == "Bash":  # só o que roda: tira corpo de heredoc e texto entre aspas (citação não é execução)
+        alvo = re.sub(r"<<-?\s*['\"]?(\w+)['\"]?.*?\n\1\b", "<<HEREDOC", alvo, flags=re.S)
+        alvo = re.sub(r"'[^']*'|\"(?:[^\"\\]|\\.)*\"", "''", alvo)
     for r in lista:
         if r.get("ferramenta", "Bash") not in (ferr, "*"):
             continue

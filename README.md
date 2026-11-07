@@ -32,7 +32,7 @@ O modelo é o mesmo; o que melhora é o sistema em volta dele. E a correção ma
 | `jardineiro.py` | O mesmo em todos os projetos de uma vez, toda semana: taxa de reincidência, erros que "mudaram de casa", ranking | loop de fora |
 | `gancho.py` + `ganchos.json` | Hook PreToolUse: cada lição vira uma linha de JSON (padrão → mensagem) e o comando que já deu errado é bloqueado com a explicação | erro impossível |
 | `hooks/fim-de-sessao.sh` | Hook SessionEnd: roda a retro sozinho quando a sessão fecha | automação |
-| `modelos/` | Validador de passo (gera o que falta ou para), timer semanal do jardineiro | — |
+| `modelos/` | Validador de passo (gera o que falta ou para), timer semanal do jardineiro, exemplos de ganchos (`ganchos-exemplo.json`) | — |
 
 Integra com o [SIL Loop R](https://github.com/inematds/sil-loop-r) (`--sil <projeto>`): as propostas entram como
 ocorrência + lição **proposta**; só viram regra com a sua decisão.
@@ -69,6 +69,8 @@ Ligar no Claude Code (`~/.claude/settings.json`):
   "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /caminho/agente-que-aprende/hooks/fim-de-sessao.sh"}]}]
 }
 ```
+
+O `ganchos.json` do kit traz só a trava universal (`pkill -f`). Travas da sua máquina vão num arquivo seu, ligado por `AQA_GANCHOS=/caminho/meus.json` antes do comando do hook. O gancho funciona no Claude Code; no Codex, a retro e o jardineiro já funcionam.
 
 Timer semanal: copiar `modelos/systemd/jardineiro.{service,timer}` para `~/.config/systemd/user/`, ajustar os caminhos e
 `systemctl --user enable --now jardineiro.timer`.

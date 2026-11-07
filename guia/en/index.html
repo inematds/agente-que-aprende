@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>agente-que-aprende — turn recurring mistakes into guards</title>
-<meta name="description" content="A Python toolkit for Claude Code and Codex: end-of-session retros, rankings of recurring errors, and hooks that block commands that have already gone wrong. No API.">
+<title>agente-que-aprende — the mistake that comes back becomes a guard</title>
+<meta name="description" content="A Python kit for Claude Code and Codex: end-of-session retros, a ranking of recurring mistakes, and hooks that block commands that have already gone wrong. No API.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/agente-que-aprende/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/agente-que-aprende/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/agente-que-aprende/guia/es/">
@@ -127,39 +127,39 @@
   <div class="glow"></div>
   <div class="wrap">
     <div>
-      <span class="chip">Toolkit · Claude Code and Codex · no API</span>
-      <h1>Turn recurring mistakes into <span class="amb">guards</span></h1>
-      <p class="lead">Your agent makes a mistake, you correct it, and tomorrow it makes the same mistake again. This toolkit finds where you corrected the agent, spots recurring mistakes—even across projects—and turns each lesson into a hook, validator, or test the model can't skip.</p>
+      <span class="chip">Kit · Claude Code and Codex · no API</span>
+      <h1>The mistake that comes back becomes a <span class="amb">guard</span></h1>
+      <p class="lead">Your agent makes a mistake, you correct it, and tomorrow it makes the same one again. This kit finds where you corrected the agent, finds the mistake that keeps recurring — even in another project — and turns the lesson into a hook, validator, or test the model can't skip.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
         <a class="btn ghost" href="https://github.com/inematds/agente-que-aprende" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
-    <figure><img src="../assets/banner-en.jpg" alt="Banner: agente-que-aprende — turn recurring mistakes into guards"></figure>
+    <figure><img src="../assets/banner-en.jpg" alt="Banner: agente-que-aprende — the mistake that comes back becomes a guard"></figure>
   </div>
 </header>
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">In short</span>
-  <p>agente-que-aprende is a toolkit of four Python scripts for people who work with AI coding agents such as Claude Code and Codex. It reads your sessions and the files where you record failures and lessons (FALHAS.md, LESSONS.md), shows where you corrected the agent and which mistakes keep coming back, and helps turn each lesson into an automatic guard instead of another written rule. It only needs Python 3; it uses no internet or API, and no rule is adopted without your decision.</p>
+  <p>agente-que-aprende is a kit of four Python scripts for people who work with AI coding agents such as Claude Code and Codex. It reads your sessions and the files where you record failures and lessons (FALHAS.md, LESSONS.md), shows where you corrected the agent and which mistakes keep coming back, and helps turn each lesson into an automatic guard instead of yet another written rule. It needs only Python 3; it uses no internet or API, and no rule is adopted without your decision.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
   <span class="chip">What it is</span>
   <h2>The model stays the same. The system around it gets better.</h2>
-  <p class="sub">A written rule is the weakest correction: the model can skip it. Here’s the order of strength: <strong>architecture</strong> (makes the mistake impossible) &gt; <strong>hook/validator</strong> (blocks it) &gt; <strong>test</strong> (catches it) &gt; <strong>prose</strong>.</p>
-  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="The toolkit’s six parts: retro, climb a rung, gardener, hook, validator, and SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
+  <p class="sub">A written rule is the weakest correction: the model can skip it. The order of strength is <strong>architecture</strong> (the mistake becomes impossible) &gt; <strong>hook/validator</strong> (blocks it) &gt; <strong>test</strong> (catches it) &gt; <strong>checklist</strong> &gt; <strong>prose</strong>.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="The kit's six parts: retro, climb a rung, gardener, hook, validator, and SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🔁 One-minute retro</h3><p><code>retro.py</code> reads the session and lists each time you corrected the agent and each recurring tool error, with a suggested rung. It runs automatically when the session ends.</p></div>
+    <div class="card"><h3>🔁 One-minute retro</h3><p><code>retro.py</code> reads the session and lists every time you corrected the agent and every tool error that repeated, with the suggested rung. It runs on its own when the session closes.</p></div>
     <div class="card"><h3>🪜 Climb a rung</h3><p><code>degrau.py</code> and <code>jardineiro.py</code> read FALHAS and LESSONS, group the same mistake written in different ways, and show what is still only prose and keeps recurring.</p></div>
-    <div class="card"><h3>🔒 A hook that blocks</h3><p><code>gancho.py</code> is a Claude Code hook: each lesson becomes a line in <code>ganchos.json</code>, and commands that have already gone wrong are blocked with an explanation sent back to the agent.</p></div>
+    <div class="card"><h3>🔒 A hook that blocks</h3><p><code>gancho.py</code> is a Claude Code hook: each lesson becomes a line in <code>ganchos.json</code>, and the command that already went wrong is blocked, with the explanation sent back to the agent. It works in Claude Code; in Codex, the retro and the gardener already work, the hook doesn't yet.</p></div>
   </div>
 </div></section>
 
 <section id="fluxo"><div class="wrap">
   <span class="chip">How it works</span>
   <h2>The cycle, and where each script fits</h2>
-  <p class="sub">The agent runs a command, gets feedback, the feedback is checked, you approve it, and the lesson stays somewhere the next run can't ignore.</p>
+  <p class="sub">The agent runs, gets feedback, the feedback is checked, you approve, and the lesson lands where the next run can't ignore it.</p>
   <div class="flow">
     <span>Session ends</span><span class="arr">→</span>
     <span>retro.py (corrections + errors)</span><span class="arr">→</span>
@@ -170,60 +170,63 @@
     <span>recurrence drops</span>
   </div>
   <div class="grid g3" style="margin-top:26px">
-    <div class="card"><h3>The 6 rungs</h3><p>1 protections (tests, types, lint) · 2 skills · 3 memory · 4 make the mistake impossible · 5 automation · 6 self-improvement. The top is the final rung: without the ones below it, there’s nothing to learn from.</p></div>
-    <div class="card"><h3>Transparent suggestions</h3><p>The current rung and suggestion come from signal words in <code>aprende/comum.py</code> ("ausente/pulou" (missing/skipped) → architecture; "conferir antes" (check first) → validator; dangerous command → hook). The words and reports are in Portuguese (with some English); you can adjust the list and decide.</p></div>
-    <div class="card"><h3>Integrates with SIL Loop R</h3><p><a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> is a separate open source project: a local (SQLite) log of incidents and lessons, where nothing becomes a rule without a human decision. With <code>--sil &lt;projeto&gt;</code>, each toolkit proposal is added there as an incident + proposed lesson. Optional.</p></div>
+    <div class="card"><h3>The 6 rungs</h3><p>1 protections (tests, types, lint) · 2 skills · 3 memory · 4 impossible mistake · 5 automation · 6 self-improvement. The top is the last rung: without the ones below, there's nothing to learn from. The ladder is the team's path; the order of strength (architecture &gt; hook &gt; test &gt; checklist &gt; prose) applies to each lesson.</p></div>
+    <div class="card"><h3>Transparent guess</h3><p>The current rung and the suggestion come from signal words in <code>aprende/comum.py</code> ("ausente/pulou" (missing/skipped) → architecture; "conferir antes" (check first) → validator; dangerous command → hook). The words and reports are in Portuguese (with some English); you adjust the list and decide.</p></div>
+    <div class="card"><h3>Integrates with SIL Loop R</h3><p><a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> is another open project: a local notebook (SQLite) of incidents and lessons, where nothing becomes a rule without a human decision. With <code>--sil &lt;projeto&gt;</code>, each kit proposal goes in there as an incident + proposed lesson. It's optional.</p></div>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
   <span class="chip">Prerequisites</span>
-  <h2>Python 3 is all you need</h2>
+  <h2>Just Python 3</h2>
   <p class="sub">No dependencies, no keys, no network calls. SIL Loop R is optional.</p>
   <div class="grid g3">
     <div class="card"><h3>Python 3.10+</h3><p>Standard library only.</p><pre><span class="c"># check</span>
 <span class="k">python3</span> --version</pre></div>
-    <div class="card"><h3>Your records</h3><p>Files with these names: <code>FALHAS.md</code> (table: date | what broke | smallest fix | prompt/infra), <code>LICOES.md</code> (three-column table), and/or <code>LESSONS.md</code> (list "- rule (date)"). Table rows start with the date (AAAA-MM-DD or dd/mm).</p><pre><span class="c"># example row</span>
+    <div class="card"><h3>Your records</h3><p>Files with these names: <code>FALHAS.md</code> (table: date | what broke | smallest fix | prompt/infra), <code>LICOES.md</code> (3-column table) and/or <code>LESSONS.md</code> (list "- rule (date)"). Each table row starts with the date (YYYY-MM-DD or dd/mm).</p><pre><span class="c"># example row</span>
 | 2026-11-06 | render caiu: template ausente | rodar o passo antes | prompt |</pre></div>
-    <div class="card"><h3>Optional</h3><p>Claude Code (for hooks), systemd (weekly timer), and SIL Loop R (to receive proposals). The toolkit looks for SIL in <code>~/projetos/sil-loop-r/</code>, on your PATH (<code>sil</code>), or in <code>AQA_SIL</code>.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/sil-loop-r.git</span> ~/projetos/sil-loop-r
+    <div class="card"><h3>Optional</h3><p>Claude Code (for the hooks), systemd (weekly timer), and SIL Loop R (to receive the proposals). The kit looks for SIL in <code>~/projetos/sil-loop-r/</code>, on the PATH (<code>sil</code>), or in <code>AQA_SIL</code>.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/sil-loop-r.git</span> ~/projetos/sil-loop-r
 <span class="k">python3</span> ~/projetos/sil-loop-r/sil.py --project ~/projetos/meu-app init</pre></div>
   </div>
 </div></section>
 
 <section id="guia"><div class="wrap">
-  <span class="chip">Step-by-step guide</span>
+  <span class="chip">User guide · step by step</span>
   <h2>From clone to your first guard</h2>
-  <p class="sub">Each step uses commands from the repository. The tests use sample data and run offline.</p>
+  <p class="sub">Each step uses the repository's commands. The tests use fictional data and run without a network.</p>
 
   <div class="step"><div class="b">1</div><div>
-    <h3>Clone and test</h3>
-    <p>The 10 tests check table parsing, the retro, the hook, and integration with SIL.</p>
-<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/agente-que-aprende.git</span> &amp;&amp; <span class="k">cd</span> agente-que-aprende
+    <h3>Download and test</h3>
+    <p>The 10 tests check table parsing, the retro, the hook, and the SIL integration.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/agente-que-aprende.git</span> && <span class="k">cd</span> agente-que-aprende
 <span class="k">python3</span> -m unittest discover -s tests -v   <span class="c"># OK</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
-    <h3>See what could climb a rung in a project</h3>
-    <p>Reads the project’s failures and lessons, then lists recurring issues that are still only prose, with a suggested rung and the source lines.</p>
-<pre><span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
+    <h3>See what should climb a rung in a project</h3>
+    <p>Reads the project's failures and lessons and lists what keeps recurring and is still only prose, with the suggested rung and the source lines.</p>
+<pre><span class="k">python3</span> degrau.py tests/dados/FALHAS.md   <span class="c"># demo with the repo's data</span>
+<span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
     <h3>Run the gardener across all projects</h3>
-    <p>Measures recurrence (how many records describe the same mistake again), shows mistakes that have “moved house,” and builds an overall ranking.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
+    <p>Measures recurrence (how much of the record is the same mistake again), shows the mistakes that "moved house," and the overall ranking.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz tests   <span class="c"># demo</span>
+<span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
     <h3>Run a retro on a session</h3>
-    <p>Point it to the session file (most recent: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> adds a retro prompt you can paste into the agent (“what went wrong here?”).</p>
-<pre><span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
-<span class="k">python3</span> retro.py ~/.codex/sessions/<span class="s">&lt;aaaa/mm/dd&gt;</span>/rollout-<span class="s">&lt;…&gt;</span>.jsonl   <span class="c"># Codex also</span></pre>
+    <p>Point it at the session file (the most recent ones: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> appends the retro prompt to paste into the agent ("what went wrong here?").</p>
+<pre><span class="k">python3</span> retro.py tests/dados/sessao.jsonl --pergunta   <span class="c"># demo</span>
+<span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
+<span class="k">python3</span> retro.py ~/.codex/sessions/<span class="s">&lt;aaaa/mm/dd&gt;</span>/rollout-<span class="s">&lt;…&gt;</span>.jsonl   <span class="c"># Codex too</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Turn a lesson into a hook</h3>
-    <p>Add another item to the <code>ganchos.json</code> list (comma-separated): the pattern for the wrong command, the exception (optional), the message, and where the lesson came from. To keep the toolkit file untouched, use your own file at <code>AQA_GANCHOS=/caminho/meus.json</code>. Test before enabling step 6: the hook only blocks when the command runs, not when it appears in prose or grep output.</p>
+    <p>One more item in the <code>ganchos.json</code> list (comma-separated): the pattern of the wrong command, the exception (optional), the message, and where the lesson came from. The kit already ships with a universal guard (<code>pkill-f</code>); more examples in <code>modelos/ganchos-exemplo.json</code>. To leave the kit's file untouched, use your own file via <code>AQA_GANCHOS=/caminho/meus.json</code>. Test before turning on step 6: the hook ignores what's inside quotes and inside a heredoc, so quoting the command in a text, a commit, or a grep isn't blocked.</p>
 <pre>{"id": "pkill-f", "ferramenta": "Bash", "padrao": "\\bpkill\\b[^|;&amp;]*\\s-f\\b",
  "mensagem": "Liste com pgrep -af e mate por PID em outro comando.", "origem": "FALHAS (7x)"}
 
@@ -231,8 +234,8 @@
   </div></div>
 
   <div class="step"><div class="b">6</div><div>
-    <h3>Enable in Claude Code</h3>
-    <p>In <code>~/.claude/settings.json</code>: the hook runs before every Bash command, and the retro runs when the session ends (reports go in <code>~/.local/share/agente-que-aprende/retro/</code>, only if a correction or recurring error was found).</p>
+    <h3>Turn it on in Claude Code</h3>
+    <p>In <code>~/.claude/settings.json</code>: the hook before every Bash command and the retro when the session closes (reports in <code>~/.local/share/agente-que-aprende/retro/</code>, only when there was a correction or a repeated error).</p>
 <pre>"hooks": {
   "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "python3 /caminho/agente-que-aprende/gancho.py"}]}],
   "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /caminho/agente-que-aprende/hooks/fim-de-sessao.sh"}]}]
@@ -240,29 +243,30 @@
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
-    <h3>Run the gardener every week</h3>
-    <p>Copy the timer, then in <code>jardineiro.service</code> replace <code>KIT</code> (where the toolkit is), <code>SAIDA</code> (where reports are saved), and <code>--raiz %h/projetos</code> (where your projects are). A new report comes out every Monday at 7:30 a.m.</p>
+    <h3>Gardener every week</h3>
+    <p>Copy the timer and, in <code>jardineiro.service</code>, change <code>KIT</code> (where the kit lives), <code>SAIDA</code> (where to save the reports), and the <code>--raiz %h/projetos</code> (where your projects live). Every Monday at 07:30 a new report comes out.</p>
 <pre><span class="k">cp</span> modelos/systemd/jardineiro.{service,timer} ~/.config/systemd/user/
-<span class="k">systemctl</span> --user daemon-reload &amp;&amp; <span class="k">systemctl</span> --user enable --now jardineiro.timer</pre>
+<span class="k">systemctl</span> --user daemon-reload && <span class="k">systemctl</span> --user enable --now jardineiro.timer</pre>
   </div></div>
 
   <div class="step"><div class="b">8</div><div>
-    <h3>Send proposals to SIL (optional)</h3>
-    <p>With SIL installed and initialized in the project (see Prerequisites), the first 5 candidates become an incident + proposed lesson in SIL Loop R. Nothing is adopted without your approval.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app</pre>
+    <h3>Send the proposals to SIL (optional)</h3>
+    <p>With SIL installed and initialized in the project (see Prerequisites), the top 5 candidates become an incident + proposed lesson in SIL Loop R (<code>retro.py</code> also accepts <code>--sil</code>). Nothing is adopted without you.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app
+<span class="k">AQA_SIL</span>=/outro/lugar/sil.py <span class="k">python3</span> retro.py sessao.jsonl --sil ~/projetos/meu-app   <span class="c"># SIL outside ~/projetos</span></pre>
   </div></div>
 </div></section>
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Examples</span>
   <h2>What it found on the first pass</h2>
-  <p class="sub">Run against INEMA’s real records on Nov 7, 2026: 196 failure and lesson files, 1,880 records, in less than 1 second.</p>
+  <p class="sub">Run on INEMA's real records on Nov 7, 2026: 196 failure and lesson files, 1,880 records, in under 1 second.</p>
   <div class="grid g3">
-    <div class="card"><h3>10% are the same mistake again</h3><p>180 records across 84 recurring groups; 57 groups span projects—the mistake just moved house.</p></div>
-    <div class="card"><h3>pkill -f: 7× in 6 projects</h3><p>Killing a process by pattern also killed the shell running the command. Each time, it became another line of prose. Now there’s the <code>pkill-f</code> hook: it blocks the command immediately and explains the right approach in its message.</p></div>
-    <div class="card"><h3>“Template ausente” (missing template) 4×</h3><p>Rendering failed because an earlier step hadn’t run. The toolkit suggests architecture: make the chain generate what’s missing (<code>modelos/validador-passo.sh</code>).</p></div>
+    <div class="card"><h3>10% is the same mistake again</h3><p>180 records in 84 repetition groups; 57 groups cross projects — the mistake just moved house.</p></div>
+    <div class="card"><h3>pkill -f: 7× in 6 projects</h3><p>Killing a process by pattern killed the shell itself. Each time it became a line of prose. Now it's the <code>pkill-f</code> hook: the command is blocked on the spot, with the right way in the message.</p></div>
+    <div class="card"><h3>"Template ausente" (missing template) 4×</h3><p>The render failed because an earlier step didn't run. The kit's suggestion: architecture — the chain generates what's missing (<code>modelos/validador-passo.sh</code>).</p></div>
   </div>
-<pre style="margin-top:18px"><span class="c"># jardineiro report excerpt</span>
+<pre style="margin-top:18px"><span class="c"># excerpt from the gardener report</span>
 - 196 arquivos em 190 projetos · 1880 registros
 - <strong>reincidência: 10%</strong> (180 registros em 84 grupos de 2+)
 1. pkill -f "&lt;padrão&gt;" no mesmo comando matou o próprio shell — 7× em 6 projetos · texto → <strong>gancho/validador</strong>
@@ -271,17 +275,17 @@
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
-  <h2>What’s next</h2>
-  <p class="sub">There’s one measure: weekly recurrence should go down.</p>
-  <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Retro, rung, gardener, and hook</strong><span>The four scripts, Claude Code hooks, weekly timer, SIL Loop R integration, and 10 tests.</span></div></div>
-  <div class="phase"><div class="tag">Next</div><div class="d"><strong>Hooks for Codex</strong><span>Apply the same hook list to Codex sessions.</span></div></div>
-  <div class="phase"><div class="tag">Later</div><div class="d"><strong>Recurrence chart</strong><span>Show weekly reports on a timeline so you can see whether the guards are working.</span></div></div>
+  <h2>From here on</h2>
+  <p class="sub">There's only one measure: weekly recurrence has to go down.</p>
+  <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Retro, rung, gardener, and hook</strong><span>The four scripts, Claude Code hooks, weekly timer, SIL Loop R integration, 10 tests.</span></div></div>
+  <div class="phase"><div class="tag">Next</div><div class="d"><strong>Hooks for Codex</strong><span>The same hook list applied to Codex sessions.</span></div></div>
+  <div class="phase"><div class="tag">Later</div><div class="d"><strong>Recurrence chart</strong><span>History of the weekly reports on a timeline, to see whether the guards are working.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Python 3</div><div class="pill">Claude Code hooks</div><div class="pill">SIL Loop R</div>
-    <p style="margin-top:18px">agente-que-aprende · open toolkit, MIT license ·
+    <p style="margin-top:18px">agente-que-aprende · open kit, MIT license ·
       <a href="https://github.com/inematds/agente-que-aprende">inematds/agente-que-aprende</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
   </div>

@@ -66,6 +66,8 @@ Conectarlo a Claude Code (`~/.claude/settings.json`):
 }
 ```
 
+El `ganchos.json` del kit trae solo la traba universal (`pkill -f`). Las trabas propias de tu máquina van en un archivo tuyo, activado con `AQA_GANCHOS=/ruta/mios.json` antes del comando del hook (ejemplos en `modelos/ganchos-exemplo.json`). El gancho funciona en Claude Code; en Codex, la retro y el jardinero ya funcionan.
+
 Temporizador semanal: copia `modelos/systemd/jardineiro.{service,timer}` a `~/.config/systemd/user/`, ajusta las rutas y
 ejecuta `systemctl --user enable --now jardineiro.timer`.
 

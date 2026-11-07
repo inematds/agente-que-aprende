@@ -81,10 +81,22 @@ class Gancho(unittest.TestCase):
         # só cita o comando (documento, heredoc, grep): não bloqueia
         self.assertIsNone(gancho.checar(self.ev("python3 - <<'E'\nt = 'o comando `" + "pk" + "ill -f` no texto'\nE"), R))
         self.assertIsNone(gancho.checar(self.ev("grep -n '" + "pk" + "ill -f' FALHAS.md"), R))
+        self.assertIsNone(gancho.checar(self.ev("git commit -m 'evitar sudo " + "pk" + "ill -f srv'"), R))
+        self.assertIsNone(gancho.checar({"tool_name": "Read", "tool_input": {"file_path": "pkill -f"}}, R))
+        # o padrão do kit só traz a trava universal; as específicas de máquina ficam nos exemplos
+        self.assertEqual([r["id"] for r in R if r in json.loads((KIT / "ganchos.json").read_text())], ["pkill-f"])
+
+    def test_exemplos_via_aqa_ganchos(self):
+        import os
+        os.environ["AQA_GANCHOS"] = str(KIT / "modelos" / "ganchos-exemplo.json")
+        try:
+            R = gancho.regras()
+        finally:
+            del os.environ["AQA_GANCHOS"]
         self.assertEqual(gancho.checar(self.ev("cd x && python baixar.py"), R)["id"], "python-sem-3")
         self.assertIsNone(gancho.checar(self.ev("python3 baixar.py"), R))
+        self.assertEqual(gancho.checar(self.ev("gh repo create a/b --source . --push"), R)["id"], "gh-create-master")
         self.assertIsNone(gancho.checar(self.ev("git init -b main && gh repo create a/b --source . --push"), R))
-        self.assertIsNone(gancho.checar({"tool_name": "Read", "tool_input": {"file_path": "pkill -f"}}, R))
 
     def test_codigo_de_saida(self):
         p = subprocess.run([sys.executable, str(KIT / "gancho.py")], input=json.dumps(self.ev("pkill -f x")),

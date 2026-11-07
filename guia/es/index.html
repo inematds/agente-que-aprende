@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>agente-que-aprende — el error que vuelve se convierte en una traba</title>
-<meta name="description" content="Kit en Python para Claude Code y Codex: retro de fin de sesión, ranking de errores repetidos y ganchos que bloquean el comando que ya falló. Sin API.">
+<title>agente-que-aprende — el error que vuelve se convierte en traba</title>
+<meta name="description" content="Kit en Python para Claude Code y Codex: retro de fin de sesión, ranking de errores que se repiten y ganchos que bloquean el comando que ya falló. Sin API.">
 <link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/agente-que-aprende/guia/">
 <link rel="alternate" hreflang="en" href="https://inematds.github.io/agente-que-aprende/guia/en/">
 <link rel="alternate" hreflang="es" href="https://inematds.github.io/agente-que-aprende/guia/es/">
@@ -128,64 +128,64 @@
   <div class="wrap">
     <div>
       <span class="chip">Kit · Claude Code y Codex · sin API</span>
-      <h1>El error que vuelve se convierte en una <span class="amb">traba</span></h1>
-      <p class="lead">Tu agente se equivoca, lo corriges y al día siguiente vuelve a equivocarse igual. Este kit detecta dónde lo corregiste, identifica los errores que se repiten —incluso en otro proyecto— y convierte la lección en un gancho, validador o prueba que el modelo no puede saltarse.</p>
+      <h1>El error que vuelve se convierte en <span class="amb">traba</span></h1>
+      <p class="lead">Tu agente se equivoca, lo corriges, y mañana se equivoca igual. Este kit encuentra dónde lo corregiste, encuentra el error que se repite — incluso en otro proyecto — y convierte la lección en un gancho, validador o prueba que el modelo no puede saltarse.</p>
       <div class="cta">
         <a class="btn" href="#guia">Empezar la guía</a>
         <a class="btn ghost" href="https://github.com/inematds/agente-que-aprende" target="_blank" rel="noopener">Ver en GitHub</a>
       </div>
     </div>
-    <figure><img src="../assets/banner-es.jpg" alt="Banner: agente que aprende — el error que vuelve se convierte en una traba"></figure>
+    <figure><img src="../assets/banner-es.jpg" alt="Banner: agente que aprende — el error que vuelve se convierte en traba"></figure>
   </div>
 </header>
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">En resumen</span>
-  <p>agente-que-aprende es un kit de cuatro scripts en Python para quienes trabajan con agentes de IA para programar, como Claude Code y Codex. Lee tus sesiones y los archivos donde registras fallas y lecciones (FALHAS.md, LESSONS.md), muestra dónde corregiste al agente y qué errores vuelven, y te ayuda a convertir cada lección en una traba automática en lugar de otra regla escrita. Solo requiere Python 3; no usa internet ni API, y ninguna regla se adopta sin tu decisión.</p>
+  <p>agente-que-aprende es un kit de cuatro scripts en Python para quienes trabajan con agentes de IA de programación, como Claude Code y Codex. Lee tus sesiones y los archivos donde anotas fallas y lecciones (FALHAS.md, LESSONS.md), muestra dónde corregiste al agente y qué errores vuelven, y te ayuda a convertir cada lección en una traba automática en lugar de una regla escrita más. Solo necesita Python 3; no usa internet ni API, y ninguna regla se adopta sin tu decisión.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
   <span class="chip">Qué es</span>
-  <h2>El modelo es el mismo. El sistema que lo rodea mejora.</h2>
-  <p class="sub">Una regla escrita es la corrección más débil: el modelo puede saltársela. El orden de fuerza es <strong>arquitectura</strong> (el error se vuelve imposible) &gt; <strong>gancho/validador</strong> (bloquea) &gt; <strong>prueba</strong> (detecta) &gt; <strong>texto</strong>.</p>
-  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Las seis partes del kit: retro, subir un peldaño, jardinero, gancho, validador y SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
+  <h2>El modelo es el mismo. El sistema a su alrededor mejora.</h2>
+  <p class="sub">La regla escrita es la corrección más débil: el modelo puede saltársela. El orden de fuerza es <strong>arquitectura</strong> (el error se vuelve imposible) &gt; <strong>gancho/validador</strong> (bloquea) &gt; <strong>prueba</strong> (detecta) &gt; <strong>checklist</strong> &gt; <strong>texto</strong>.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-es.jpg" alt="Las seis piezas del kit: retro, subir de peldaño, jardinero, gancho, validador y SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🔁 Retro de 1 minuto</h3><p><code>retro.py</code> lee la sesión y enumera cada vez que corregiste al agente y cada error de herramienta que se repitió, junto con el peldaño sugerido. Se ejecuta automáticamente cuando se cierra la sesión.</p></div>
-    <div class="card"><h3>🪜 Subir un peldaño</h3><p><code>degrau.py</code> y <code>jardineiro.py</code> leen FALHAS y LESSONS, agrupan el mismo error aunque esté escrito de distintas maneras y muestran qué sigue siendo solo texto y se repite.</p></div>
-    <div class="card"><h3>🔒 Gancho que bloquea</h3><p><code>gancho.py</code> es un hook de Claude Code: cada lección se convierte en una línea de <code>ganchos.json</code> y se bloquea el comando que ya falló, con una explicación para el agente.</p></div>
+    <div class="card"><h3>🔁 Retro de 1 minuto</h3><p><code>retro.py</code> lee la sesión y lista cada vez que corregiste al agente y cada error de herramienta que se repitió, con el peldaño sugerido. Se ejecuta solo cuando la sesión se cierra.</p></div>
+    <div class="card"><h3>🪜 Subir de peldaño</h3><p><code>degrau.py</code> y <code>jardineiro.py</code> leen FALHAS y LESSONS, agrupan el mismo error escrito de formas distintas y muestran lo que todavía es solo texto y se repite.</p></div>
+    <div class="card"><h3>🔒 Gancho que bloquea</h3><p><code>gancho.py</code> es un hook de Claude Code: cada lección se vuelve una línea en <code>ganchos.json</code> y el comando que ya falló queda bloqueado, con la explicación de vuelta para el agente. Funciona en Claude Code; en Codex, la retro y el jardinero ya funcionan, el gancho todavía no.</p></div>
   </div>
 </div></section>
 
 <section id="fluxo"><div class="wrap">
   <span class="chip">Cómo funciona</span>
-  <h2>El ciclo y dónde entra cada script</h2>
-  <p class="sub">El agente ejecuta, recibe una respuesta, se verifica esa respuesta, tú la apruebas y la lección queda donde la próxima ejecución no puede ignorarla.</p>
+  <h2>El ciclo, y dónde entra cada script</h2>
+  <p class="sub">El agente ejecuta, recibe retorno, el retorno se revisa, tú apruebas, y la lección queda donde la próxima ejecución no puede ignorarla.</p>
   <div class="flow">
-    <span>Termina la sesión</span><span class="arr">→</span>
+    <span>La sesión termina</span><span class="arr">→</span>
     <span>retro.py (correcciones + errores)</span><span class="arr">→</span>
     <span>Tú eliges (compuerta humana)</span><span class="arr">→</span>
     <span>FALHAS / LESSONS / SIL</span><span class="arr">→</span>
     <span>jardineiro.py semanal</span><span class="arr">→</span>
     <span>gancho, validador o prueba</span><span class="arr">→</span>
-    <span>disminuye la reincidencia</span>
+    <span>la reincidencia baja</span>
   </div>
   <div class="grid g3" style="margin-top:26px">
-    <div class="card"><h3>Los 6 peldaños</h3><p>1 protecciones (pruebas, tipos, lint) · 2 skills · 3 memoria · 4 error imposible · 5 automatización · 6 automejora. La cima es el último peldaño: sin los anteriores no hay nada que aprender.</p></div>
-    <div class="card"><h3>Estimación transparente</h3><p>El peldaño actual y la sugerencia se obtienen de palabras clave en <code>aprende/comum.py</code> ("ausente/pulou" (ausente/se saltó) → arquitectura; "conferir antes" (revisar antes) → validador; comando peligroso → gancho). Las palabras y los informes están en portugués (en parte, en inglés); puedes ajustar la lista y decidir.</p></div>
-    <div class="card"><h3>Se integra con SIL Loop R</h3><p><a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> es otro proyecto abierto: un cuaderno local (SQLite) de incidencias y lecciones en el que nada se convierte en regla sin una decisión humana. Con <code>--sil &lt;projeto&gt;</code>, cada propuesta del kit se agrega allí como incidencia + lección propuesta. Es opcional.</p></div>
+    <div class="card"><h3>Los 6 peldaños</h3><p>1 protecciones (pruebas, tipos, lint) · 2 skills · 3 memoria · 4 error imposible · 5 automatización · 6 automejora. La cima es el último peldaño: sin los de abajo no hay de qué aprender. La escalera es el camino del equipo; el orden de fuerza (arquitectura &gt; gancho &gt; prueba &gt; checklist &gt; texto) vale para cada lección.</p></div>
+    <div class="card"><h3>Estimación transparente</h3><p>El peldaño actual y la sugerencia salen de palabras-señal en <code>aprende/comum.py</code> ("ausente/pulou" (ausente/se saltó) → arquitectura; "conferir antes" (revisar antes) → validador; comando peligroso → gancho). Las palabras y los informes están en portugués (con una parte en inglés); tú ajustas la lista y decides.</p></div>
+    <div class="card"><h3>Se integra con SIL Loop R</h3><p><a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> es otro proyecto abierto: un cuaderno local (SQLite) de ocurrencias y lecciones, en el que nada se vuelve regla sin decisión humana. Con <code>--sil &lt;projeto&gt;</code>, cada propuesta del kit entra allí como ocurrencia + lección propuesta. Es opcional.</p></div>
   </div>
 </div></section>
 
 <section id="pre"><div class="wrap">
   <span class="chip">Requisitos previos</span>
   <h2>Solo Python 3</h2>
-  <p class="sub">Sin dependencias, sin claves, sin llamadas a la red. SIL Loop R es opcional.</p>
+  <p class="sub">Ninguna dependencia, ninguna clave, ninguna llamada de red. SIL Loop R es opcional.</p>
   <div class="grid g3">
-    <div class="card"><h3>Python 3.10+</h3><p>Solo biblioteca estándar.</p><pre><span class="c"># verificar</span>
+    <div class="card"><h3>Python 3.10+</h3><p>Solo la biblioteca estándar.</p><pre><span class="c"># verificar</span>
 <span class="k">python3</span> --version</pre></div>
-    <div class="card"><h3>Tus registros</h3><p>Archivos con estos nombres: <code>FALHAS.md</code> (tabla: fecha | qué falló | corrección mínima | prompt/infra), <code>LICOES.md</code> (tabla de 3 columnas) y/o <code>LESSONS.md</code> (lista "- regla (fecha)"). La fila de la tabla comienza con la fecha (AAAA-MM-DD o dd/mm).</p><pre><span class="c"># ejemplo de fila</span>
-| 2026-11-06 | render cayó: falta la plantilla | ejecutar el paso antes | prompt |</pre></div>
-    <div class="card"><h3>Opcional</h3><p>Claude Code (para los hooks), systemd (temporizador semanal) y SIL Loop R (para recibir las propuestas). El kit busca SIL en <code>~/projetos/sil-loop-r/</code>, en el PATH (<code>sil</code>) o en <code>AQA_SIL</code>.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/sil-loop-r.git</span> ~/projetos/sil-loop-r
+    <div class="card"><h3>Tus registros</h3><p>Archivos con estos nombres: <code>FALHAS.md</code> (tabla: fecha | qué se rompió | corrección mínima | prompt/infra), <code>LICOES.md</code> (tabla de 3 columnas) y/o <code>LESSONS.md</code> (lista "- regla (fecha)"). La fila de la tabla empieza por la fecha (AAAA-MM-DD o dd/mm).</p><pre><span class="c"># ejemplo de fila</span>
+| 2026-11-06 | render caiu: template ausente | rodar o passo antes | prompt |</pre></div>
+    <div class="card"><h3>Opcional</h3><p>Claude Code (para los hooks), systemd (timer semanal) y SIL Loop R (para recibir las propuestas). El kit busca el SIL en <code>~/projetos/sil-loop-r/</code>, en el PATH (<code>sil</code>) o en <code>AQA_SIL</code>.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/sil-loop-r.git</span> ~/projetos/sil-loop-r
 <span class="k">python3</span> ~/projetos/sil-loop-r/sil.py --project ~/projetos/meu-app init</pre></div>
   </div>
 </div></section>
@@ -193,37 +193,40 @@
 <section id="guia"><div class="wrap">
   <span class="chip">Guía de uso · paso a paso</span>
   <h2>Del clon a la primera traba</h2>
-  <p class="sub">Cada paso usa los comandos del repositorio. Las pruebas usan datos ficticios y se ejecutan sin conexión.</p>
+  <p class="sub">Cada paso usa los comandos del repositorio. Las pruebas usan datos ficticios y se ejecutan sin red.</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Descargar y probar</h3>
-    <p>Las 10 pruebas verifican la lectura de las tablas, la retro, el gancho y la integración con SIL.</p>
+    <p>Las 10 pruebas verifican la lectura de las tablas, la retro, el gancho y la integración con el SIL.</p>
 <pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/agente-que-aprende.git</span> && <span class="k">cd</span> agente-que-aprende
 <span class="k">python3</span> -m unittest discover -s tests -v   <span class="c"># OK</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
-    <h3>Ver qué puede subir un peldaño en un proyecto</h3>
-    <p>Lee las fallas y lecciones del proyecto y enumera lo que se repite y sigue siendo solo texto, con el peldaño sugerido y las líneas de origen.</p>
-<pre><span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
+    <h3>Ver qué subir de peldaño en un proyecto</h3>
+    <p>Lee las fallas y lecciones del proyecto y lista lo que se repite y todavía es solo texto, con el peldaño sugerido y las líneas de origen.</p>
+<pre><span class="k">python3</span> degrau.py tests/dados/FALHAS.md   <span class="c"># demostración con los datos del repo</span>
+<span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
-    <h3>Ejecutar el jardinero en todos los proyectos</h3>
-    <p>Mide la reincidencia (cuántos registros corresponden al mismo error repetido), muestra los errores que "cambiaron de casa" y el ranking general.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
+    <h3>Pasar el jardinero por todos los proyectos</h3>
+    <p>Mide la reincidencia (cuánto de los registros es el mismo error otra vez), muestra los errores que "se mudaron de casa" y el ranking general.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz tests   <span class="c"># demostración</span>
+<span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
     <h3>Hacer la retro de una sesión</h3>
-    <p>Indica el archivo de la sesión (las más recientes: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> agrega la solicitud de retro para pegarla en el agente ("¿qué salió mal aquí?").</p>
-<pre><span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
+    <p>Apunta al archivo de la sesión (las más recientes: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> agrega el pedido de retro para pegar en el agente ("¿qué salió mal aquí?").</p>
+<pre><span class="k">python3</span> retro.py tests/dados/sessao.jsonl --pergunta   <span class="c"># demostración</span>
+<span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;carpeta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
 <span class="k">python3</span> retro.py ~/.codex/sessions/<span class="s">&lt;aaaa/mm/dd&gt;</span>/rollout-<span class="s">&lt;…&gt;</span>.jsonl   <span class="c"># Codex también</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
-    <h3>Convertir una lección en un gancho</h3>
-    <p>Agrega un elemento a la lista de <code>ganchos.json</code> (separado por comas): el patrón del comando que falló, la excepción (opcional), el mensaje y el origen de la lección. Para no modificar el archivo del kit, usa un archivo propio en <code>AQA_GANCHOS=/ruta/mios.json</code>. Pruébalo antes de activar el paso 6: el gancho solo bloquea cuando se ejecuta el comando, no cuando se menciona en un texto o en un grep.</p>
+    <h3>Convertir una lección en gancho</h3>
+    <p>Un elemento más en la lista de <code>ganchos.json</code> (separado por comas): el patrón del comando equivocado, la excepción (opcional), el mensaje y de dónde vino la lección. El kit ya trae una traba universal (<code>pkill-f</code>); más ejemplos en <code>modelos/ganchos-exemplo.json</code>. Para no modificar el archivo del kit, usa un archivo propio en <code>AQA_GANCHOS=/ruta/mios.json</code>. Pruébalo antes de activar el paso 6: el gancho ignora lo que está entre comillas y dentro de un heredoc, así que citar el comando en un texto, en un commit o en un grep no se bloquea.</p>
 <pre>{"id": "pkill-f", "ferramenta": "Bash", "padrao": "\\bpkill\\b[^|;&amp;]*\\s-f\\b",
  "mensagem": "Liste com pgrep -af e mate por PID em outro comando.", "origem": "FALHAS (7x)"}
 
@@ -231,8 +234,8 @@
   </div></div>
 
   <div class="step"><div class="b">6</div><div>
-    <h3>Activar en Claude Code</h3>
-    <p>En <code>~/.claude/settings.json</code>: el gancho antes de cada comando Bash y la retro al cerrar la sesión (informes en <code>~/.local/share/agente-que-aprende/retro/</code>, solo si hubo una corrección o un error repetido).</p>
+    <h3>Activarlo en Claude Code</h3>
+    <p>En <code>~/.claude/settings.json</code>: el gancho antes de cada comando Bash y la retro cuando la sesión se cierra (informes en <code>~/.local/share/agente-que-aprende/retro/</code>, solo cuando hubo corrección o error repetido).</p>
 <pre>"hooks": {
   "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "python3 /caminho/agente-que-aprende/gancho.py"}]}],
   "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /caminho/agente-que-aprende/hooks/fim-de-sessao.sh"}]}]
@@ -241,15 +244,16 @@
 
   <div class="step"><div class="b">7</div><div>
     <h3>Jardinero cada semana</h3>
-    <p>Copia el temporizador y, en <code>jardineiro.service</code>, cambia <code>KIT</code> (dónde está el kit), <code>SAIDA</code> (dónde guardar los informes) y <code>--raiz %h/projetos</code> (dónde están tus proyectos). Cada lunes a las 07:30 se genera un informe nuevo.</p>
+    <p>Copia el timer y, en <code>jardineiro.service</code>, cambia <code>KIT</code> (dónde está el kit), <code>SAIDA</code> (dónde guardar los informes) y el <code>--raiz %h/projetos</code> (dónde están tus proyectos). Cada lunes a las 07:30 sale un informe nuevo.</p>
 <pre><span class="k">cp</span> modelos/systemd/jardineiro.{service,timer} ~/.config/systemd/user/
 <span class="k">systemctl</span> --user daemon-reload && <span class="k">systemctl</span> --user enable --now jardineiro.timer</pre>
   </div></div>
 
   <div class="step"><div class="b">8</div><div>
-    <h3>Enviar las propuestas a SIL (opcional)</h3>
-    <p>Con SIL instalado e iniciado en el proyecto (ver Requisitos previos), los primeros 5 candidatos se convierten en una incidencia + lección propuesta en SIL Loop R. No se adopta nada sin tu aprobación.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app</pre>
+    <h3>Enviar las propuestas al SIL (opcional)</h3>
+    <p>Con el SIL instalado e iniciado en el proyecto (ver Requisitos previos), los 5 primeros candidatos se vuelven ocurrencia + lección propuesta en SIL Loop R (<code>retro.py</code> también acepta <code>--sil</code>). Nada se adopta sin ti.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app
+<span class="k">AQA_SIL</span>=/outro/lugar/sil.py <span class="k">python3</span> retro.py sessao.jsonl --sil ~/projetos/meu-app   <span class="c"># SIL fuera de ~/projetos</span></pre>
   </div></div>
 </div></section>
 
@@ -258,9 +262,9 @@
   <h2>Lo que encontró en la primera pasada</h2>
   <p class="sub">Ejecutado sobre los registros reales de INEMA el 7/11/2026: 196 archivos de fallas y lecciones, 1.880 registros, en menos de 1 segundo.</p>
   <div class="grid g3">
-    <div class="card"><h3>El 10% es el mismo error otra vez</h3><p>180 registros en 84 grupos de repetición; 57 grupos abarcan varios proyectos: el error solo cambió de casa.</p></div>
-    <div class="card"><h3>pkill -f: 7× en 6 proyectos</h3><p>Matar un proceso por patrón mataba al propio shell. Cada vez quedó registrada como una línea de texto. Ahora existe el gancho <code>pkill-f</code>: el comando se bloquea en el momento, con la forma correcta en el mensaje.</p></div>
-    <div class="card"><h3>"Falta la plantilla" 4×</h3><p>El render fallaba porque no se había ejecutado un paso anterior. Sugerencia del kit: arquitectura — la cadena genera lo que falta (<code>modelos/validador-passo.sh</code>).</p></div>
+    <div class="card"><h3>El 10% es el mismo error otra vez</h3><p>180 registros en 84 grupos de repetición; 57 grupos atraviesan proyectos — el error solo se mudó de casa.</p></div>
+    <div class="card"><h3>pkill -f: 7× en 6 proyectos</h3><p>Matar procesos por patrón mataba la propia shell. Cada vez se volvió una línea de texto. Ahora es el gancho <code>pkill-f</code>: el comando se bloquea en el acto, con la forma correcta en el mensaje.</p></div>
+    <div class="card"><h3>"Template ausente" 4×</h3><p>El render fallaba porque un paso anterior no se ejecutó. Sugerencia del kit: arquitectura — la cadena genera lo que falta (<code>modelos/validador-passo.sh</code>).</p></div>
   </div>
 <pre style="margin-top:18px"><span class="c"># fragmento del informe del jardinero</span>
 - 196 arquivos em 190 projetos · 1880 registros
@@ -271,11 +275,11 @@
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
-  <h2>Lo que sigue</h2>
-  <p class="sub">Hay una sola medida: la reincidencia semanal debe bajar.</p>
-  <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Retro, peldaño, jardinero y gancho</strong><span>Los cuatro scripts, hooks de Claude Code, temporizador semanal, integración con SIL Loop R, 10 pruebas.</span></div></div>
+  <h2>De aquí en adelante</h2>
+  <p class="sub">La medida es una sola: la reincidencia semanal tiene que bajar.</p>
+  <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Retro, peldaño, jardinero y gancho</strong><span>Los cuatro scripts, hooks de Claude Code, timer semanal, integración con SIL Loop R, 10 pruebas.</span></div></div>
   <div class="phase"><div class="tag">Próximo</div><div class="d"><strong>Ganchos para Codex</strong><span>La misma lista de ganchos aplicada a las sesiones de Codex.</span></div></div>
-  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Gráfico de reincidencia</strong><span>Historial de los informes semanales en una línea de tiempo para ver si las trabas están funcionando.</span></div></div>
+  <div class="phase"><div class="tag">Después</div><div class="d"><strong>Gráfico de la reincidencia</strong><span>Historial de los informes semanales en una línea de tiempo, para ver si las trabas están funcionando.</span></div></div>
 </div></section>
 
 <footer>

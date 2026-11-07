@@ -147,12 +147,12 @@
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>O modelo é o mesmo. O sistema em volta dele melhora.</h2>
-  <p class="sub">Regra escrita é a correção mais fraca: o modelo pode pular. A ordem de força é <strong>arquitetura</strong> (o erro fica impossível) &gt; <strong>gancho/validador</strong> (bloqueia) &gt; <strong>teste</strong> (pega) &gt; <strong>texto</strong>.</p>
+  <p class="sub">Regra escrita é a correção mais fraca: o modelo pode pular. A ordem de força é <strong>arquitetura</strong> (o erro fica impossível) &gt; <strong>gancho/validador</strong> (bloqueia) &gt; <strong>teste</strong> (pega) &gt; <strong>checklist</strong> &gt; <strong>texto</strong>.</p>
   <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="assets/banner-grade.jpg" alt="Os seis pedaços do kit: retro, subir degrau, jardineiro, gancho, validador e SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
     <div class="card"><h3>🔁 Retro de 1 minuto</h3><p><code>retro.py</code> lê a sessão e lista cada vez que você corrigiu o agente e cada erro de ferramenta que se repetiu, com o degrau sugerido. Roda sozinho quando a sessão fecha.</p></div>
     <div class="card"><h3>🪜 Subir degrau</h3><p><code>degrau.py</code> e <code>jardineiro.py</code> leem FALHAS e LESSONS, juntam o mesmo erro escrito de jeitos diferentes e mostram o que ainda é só texto e se repete.</p></div>
-    <div class="card"><h3>🔒 Gancho que bloqueia</h3><p><code>gancho.py</code> é um hook do Claude Code: cada lição vira uma linha no <code>ganchos.json</code> e o comando que já deu errado é barrado, com a explicação de volta para o agente.</p></div>
+    <div class="card"><h3>🔒 Gancho que bloqueia</h3><p><code>gancho.py</code> é um hook do Claude Code: cada lição vira uma linha no <code>ganchos.json</code> e o comando que já deu errado é barrado, com a explicação de volta para o agente. Funciona no Claude Code; no Codex, a retro e o jardineiro já funcionam, o gancho ainda não.</p></div>
   </div>
 </div></section>
 
@@ -170,7 +170,7 @@
     <span>reincidência cai</span>
   </div>
   <div class="grid g3" style="margin-top:26px">
-    <div class="card"><h3>Os 6 degraus</h3><p>1 proteções (testes, tipos, lint) · 2 skills · 3 memória · 4 erro impossível · 5 automação · 6 autoaprimoramento. O topo é o último degrau: sem os de baixo não há do que aprender.</p></div>
+    <div class="card"><h3>Os 6 degraus</h3><p>1 proteções (testes, tipos, lint) · 2 skills · 3 memória · 4 erro impossível · 5 automação · 6 autoaprimoramento. O topo é o último degrau: sem os de baixo não há do que aprender. A escada é o caminho do time; a ordem de força (arquitetura &gt; gancho &gt; teste &gt; checklist &gt; texto) vale para cada lição.</p></div>
     <div class="card"><h3>Palpite transparente</h3><p>O degrau atual e a sugestão saem de palavras-sinal em <code>aprende/comum.py</code> ("ausente/pulou" → arquitetura; "conferir antes" → validador; comando perigoso → gancho). As palavras e os relatórios estão em português (com parte em inglês); você ajusta a lista e decide.</p></div>
     <div class="card"><h3>Integra com o SIL Loop R</h3><p>O <a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> é outro projeto aberto: um caderno local (SQLite) de ocorrências e lições, em que nada vira regra sem decisão humana. Com <code>--sil &lt;projeto&gt;</code>, cada proposta do kit entra lá como ocorrência + lição proposta. É opcional.</p></div>
   </div>
@@ -205,25 +205,28 @@
   <div class="step"><div class="b">2</div><div>
     <h3>Ver o que subir de degrau num projeto</h3>
     <p>Lê as falhas e lições do projeto e lista o que se repete e ainda é só texto, com o degrau sugerido e as linhas de origem.</p>
-<pre><span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
+<pre><span class="k">python3</span> degrau.py tests/dados/FALHAS.md   <span class="c"># demonstração com os dados do repo</span>
+<span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
     <h3>Passar o jardineiro em todos os projetos</h3>
     <p>Mede a reincidência (quanto dos registros é o mesmo erro de novo), mostra os erros que "mudaram de casa" e o ranking geral.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
+<pre><span class="k">python3</span> jardineiro.py --raiz tests   <span class="c"># demonstração</span>
+<span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
     <h3>Fazer a retro de uma sessão</h3>
     <p>Aponte para o arquivo da sessão (as mais recentes: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> acrescenta o pedido de retro para colar no agente ("o que deu errado aqui?").</p>
-<pre><span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
+<pre><span class="k">python3</span> retro.py tests/dados/sessao.jsonl --pergunta   <span class="c"># demonstração</span>
+<span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
 <span class="k">python3</span> retro.py ~/.codex/sessions/<span class="s">&lt;aaaa/mm/dd&gt;</span>/rollout-<span class="s">&lt;…&gt;</span>.jsonl   <span class="c"># Codex também</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Transformar uma lição em gancho</h3>
-    <p>Um item a mais na lista do <code>ganchos.json</code> (separado por vírgula): o padrão do comando errado, a exceção (opcional), a mensagem e de onde veio a lição. Para não mexer no arquivo do kit, use um arquivo seu em <code>AQA_GANCHOS=/caminho/meus.json</code>. Teste antes de ligar o passo 6: o gancho só barra quando o comando é executado, não quando é citado num texto ou num grep.</p>
+    <p>Um item a mais na lista do <code>ganchos.json</code> (separado por vírgula): o padrão do comando errado, a exceção (opcional), a mensagem e de onde veio a lição. O kit já vem com uma trava universal (<code>pkill-f</code>); mais exemplos em <code>modelos/ganchos-exemplo.json</code>. Para não mexer no arquivo do kit, use um arquivo seu em <code>AQA_GANCHOS=/caminho/meus.json</code>. Teste antes de ligar o passo 6: o gancho ignora o que está entre aspas e dentro de heredoc, então citar o comando num texto, num commit ou num grep não é barrado.</p>
 <pre>{"id": "pkill-f", "ferramenta": "Bash", "padrao": "\\bpkill\\b[^|;&amp;]*\\s-f\\b",
  "mensagem": "Liste com pgrep -af e mate por PID em outro comando.", "origem": "FALHAS (7x)"}
 
@@ -248,8 +251,9 @@
 
   <div class="step"><div class="b">8</div><div>
     <h3>Mandar as propostas para o SIL (opcional)</h3>
-    <p>Com o SIL instalado e iniciado no projeto (ver Pré-requisitos), os 5 primeiros candidatos viram ocorrência + lição proposta no SIL Loop R. Nada é adotado sem você.</p>
-<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app</pre>
+    <p>Com o SIL instalado e iniciado no projeto (ver Pré-requisitos), os 5 primeiros candidatos viram ocorrência + lição proposta no SIL Loop R (o <code>retro.py</code> também aceita <code>--sil</code>). Nada é adotado sem você.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app
+<span class="k">AQA_SIL</span>=/outro/lugar/sil.py <span class="k">python3</span> retro.py sessao.jsonl --sil ~/projetos/meu-app   <span class="c"># SIL fora de ~/projetos</span></pre>
   </div></div>
 </div></section>
 

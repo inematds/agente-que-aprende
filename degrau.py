@@ -26,7 +26,7 @@ def relatorio(regs, top, limite, titulo):
                 f"- **pontos {pts}** · aparece {vezes}× · hoje: **{NOME[atual]}** → subir para: **{NOME[alvo]}**",
                 f"- como: {como}"]
         for r in g[:5]:
-            lin.append(f"  - `{Path(r['arquivo']).parent.name}/{Path(r['arquivo']).name}:{r['linha']}` "
+            lin.append(f"  - `{r['arquivo']}:{r['linha']}` "
                        f"({r['data']}) {r['correcao'][:140]}")
         lin.append("")
     return "\n".join(lin) + "\n", cands

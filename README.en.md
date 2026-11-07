@@ -66,6 +66,8 @@ Connect to Claude Code (`~/.claude/settings.json`):
 }
 ```
 
+The kit's `ganchos.json` ships only the universal guard (`pkill -f`). Guards specific to your machine go in a file of your own, enabled with `AQA_GANCHOS=/path/mine.json` before the hook command (examples in `modelos/ganchos-exemplo.json`). The hook works in Claude Code; in Codex, retro and gardener already work.
+
 Weekly timer: copy `modelos/systemd/jardineiro.{service,timer}` to `~/.config/systemd/user/`, adjust the paths, and run
 `systemctl --user enable --now jardineiro.timer`.
 
