@@ -1,0 +1,10 @@
+[Unit]
+Description=agente-que-aprende: jardineiro semanal (reincidência e candidatos a subir de degrau)
+
+[Service]
+Type=oneshot
+# troque KIT e SAIDA pelos seus caminhos
+Environment=KIT=%h/projetos/agente-que-aprende SAIDA=%h/projetos/jardim
+ExecStart=/bin/sh -c 'python3 "$KIT/jardineiro.py" --raiz %h/projetos --saida "$SAIDA/$(date +%%F).md"'
+MemoryMax=1G
+TimeoutStartSec=300

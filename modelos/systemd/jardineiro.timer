@@ -1,0 +1,9 @@
+[Unit]
+Description=agente-que-aprende: jardineiro toda segunda 07:30
+
+[Timer]
+OnCalendar=Mon 07:30
+Persistent=true
+
+[Install]
+WantedBy=timers.target

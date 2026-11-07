@@ -1,0 +1,7 @@
+{"type": "user", "origin": {"kind": "human"}, "promptSource": "typed", "message": {"role": "user", "content": "faça o relatório semanal"}, "timestamp": "2026-11-07T10:00:00Z"}
+{"type": "user", "message": {"role": "user", "content": [{"type": "tool_result", "is_error": true, "content": "Exit code 1\nTraceback (most recent call last):\n  File x\nModuleNotFoundError: No module named 'pandas'"}]}}
+{"type": "user", "message": {"role": "user", "content": [{"type": "tool_result", "is_error": true, "content": "Exit code 1\nTraceback (most recent call last):\n  File y\nModuleNotFoundError: No module named 'pandas'"}]}}
+{"type": "user", "origin": {"kind": "task-notification"}, "promptSource": "system", "message": {"role": "user", "content": "tarefa errada terminou de novo"}}
+{"type": "user", "isCompactSummary": true, "message": {"role": "user", "content": "This session is being continued... errado"}}
+{"type": "user", "origin": {"kind": "human"}, "promptSource": "typed", "message": {"role": "user", "content": "não era isso, eu pedi o gráfico em barras, de novo em pizza"}, "timestamp": "2026-11-07T10:05:00Z"}
+{"type": "user", "origin": {"kind": "human"}, "promptSource": "typed", "message": {"role": "user", "content": "ótimo, pode publicar"}, "timestamp": "2026-11-07T10:09:00Z"}

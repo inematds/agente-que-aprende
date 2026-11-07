@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agente-que-aprende — o erro que volta vira trava</title>
+<meta name="description" content="Kit em Python para Claude Code e Codex: retro de fim de sessão, ranking de erros que se repetem e ganchos que bloqueiam o comando que já deu errado. Sem API.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/agente-que-aprende/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/agente-que-aprende/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/agente-que-aprende/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🪜</span> agente-que-aprende</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#fluxo">Como funciona</a>
+    <a class="sec" href="#guia">Guia de uso</a>
+    <a class="sec" href="#exemplos">Exemplos</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <span class="lang"><a class="on" href="./">PT</a><a href="en/">EN</a><a href="es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/agente-que-aprende" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Kit · Claude Code e Codex · sem API</span>
+      <h1>O erro que volta vira <span class="amb">trava</span></h1>
+      <p class="lead">Seu agente erra, você corrige, e amanhã ele erra igual. Este kit acha onde você corrigiu, acha o erro que se repete — até em outro projeto — e transforma a lição num gancho, validador ou teste que o modelo não consegue pular.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Começar o guia</a>
+        <a class="btn ghost" href="https://github.com/inematds/agente-que-aprende" target="_blank" rel="noopener">Ver no GitHub</a>
+      </div>
+    </div>
+    <figure><img src="assets/banner.jpg" alt="Banner: agente que aprende — o erro que volta vira trava"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">Em resumo</span>
+  <p>O agente-que-aprende é um kit de quatro scripts em Python para quem trabalha com agentes de IA de programação, como o Claude Code e o Codex. Ele lê as suas sessões e os arquivos onde você anota falhas e lições (FALHAS.md, LESSONS.md), mostra onde você corrigiu o agente e quais erros voltam, e ajuda a transformar cada lição numa trava automática em vez de mais uma regra escrita. Precisa só de Python 3; não usa internet nem API, e nenhuma regra é adotada sem a sua decisão.</p>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">O que é</span>
+  <h2>O modelo é o mesmo. O sistema em volta dele melhora.</h2>
+  <p class="sub">Regra escrita é a correção mais fraca: o modelo pode pular. A ordem de força é <strong>arquitetura</strong> (o erro fica impossível) &gt; <strong>gancho/validador</strong> (bloqueia) &gt; <strong>teste</strong> (pega) &gt; <strong>texto</strong>.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="assets/banner-grade.jpg" alt="Os seis pedaços do kit: retro, subir degrau, jardineiro, gancho, validador e SIL Loop R" loading="lazy" style="width:100%;display:block"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🔁 Retro de 1 minuto</h3><p><code>retro.py</code> lê a sessão e lista cada vez que você corrigiu o agente e cada erro de ferramenta que se repetiu, com o degrau sugerido. Roda sozinho quando a sessão fecha.</p></div>
+    <div class="card"><h3>🪜 Subir degrau</h3><p><code>degrau.py</code> e <code>jardineiro.py</code> leem FALHAS e LESSONS, juntam o mesmo erro escrito de jeitos diferentes e mostram o que ainda é só texto e se repete.</p></div>
+    <div class="card"><h3>🔒 Gancho que bloqueia</h3><p><code>gancho.py</code> é um hook do Claude Code: cada lição vira uma linha no <code>ganchos.json</code> e o comando que já deu errado é barrado, com a explicação de volta para o agente.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Como funciona</span>
+  <h2>O ciclo, e onde cada script entra</h2>
+  <p class="sub">O agente executa, recebe retorno, o retorno é conferido, você aprova, e a lição fica onde a próxima execução não consegue ignorar.</p>
+  <div class="flow">
+    <span>Sessão termina</span><span class="arr">→</span>
+    <span>retro.py (correções + erros)</span><span class="arr">→</span>
+    <span>Você escolhe (portão humano)</span><span class="arr">→</span>
+    <span>FALHAS / LESSONS / SIL</span><span class="arr">→</span>
+    <span>jardineiro.py semanal</span><span class="arr">→</span>
+    <span>gancho, validador ou teste</span><span class="arr">→</span>
+    <span>reincidência cai</span>
+  </div>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><h3>Os 6 degraus</h3><p>1 proteções (testes, tipos, lint) · 2 skills · 3 memória · 4 erro impossível · 5 automação · 6 autoaprimoramento. O topo é o último degrau: sem os de baixo não há do que aprender.</p></div>
+    <div class="card"><h3>Palpite transparente</h3><p>O degrau atual e a sugestão saem de palavras-sinal em <code>aprende/comum.py</code> ("ausente/pulou" → arquitetura; "conferir antes" → validador; comando perigoso → gancho). As palavras e os relatórios estão em português (com parte em inglês); você ajusta a lista e decide.</p></div>
+    <div class="card"><h3>Integra com o SIL Loop R</h3><p>O <a href="https://github.com/inematds/sil-loop-r" target="_blank" rel="noopener">SIL Loop R</a> é outro projeto aberto: um caderno local (SQLite) de ocorrências e lições, em que nada vira regra sem decisão humana. Com <code>--sil &lt;projeto&gt;</code>, cada proposta do kit entra lá como ocorrência + lição proposta. É opcional.</p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Pré-requisitos</span>
+  <h2>Só Python 3</h2>
+  <p class="sub">Nenhuma dependência, nenhuma chave, nenhuma chamada de rede. O SIL Loop R é opcional.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Python 3.10+</h3><p>Biblioteca padrão apenas.</p><pre><span class="c"># conferir</span>
+<span class="k">python3</span> --version</pre></div>
+    <div class="card"><h3>Seus registros</h3><p>Arquivos com estes nomes: <code>FALHAS.md</code> (tabela: data | o que quebrou | menor correção | prompt/infra), <code>LICOES.md</code> (tabela de 3 colunas) e/ou <code>LESSONS.md</code> (lista "- regra (data)"). A linha da tabela começa pela data (AAAA-MM-DD ou dd/mm).</p><pre><span class="c"># exemplo de linha</span>
+| 2026-11-06 | render caiu: template ausente | rodar o passo antes | prompt |</pre></div>
+    <div class="card"><h3>Opcional</h3><p>Claude Code (para os hooks), systemd (timer semanal) e o SIL Loop R (para receber as propostas). O kit procura o SIL em <code>~/projetos/sil-loop-r/</code>, no PATH (<code>sil</code>) ou em <code>AQA_SIL</code>.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/sil-loop-r.git</span> ~/projetos/sil-loop-r
+<span class="k">python3</span> ~/projetos/sil-loop-r/sil.py --project ~/projetos/meu-app init</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guia de uso · passo a passo</span>
+  <h2>Do clone à primeira trava</h2>
+  <p class="sub">Cada passo usa os comandos do repositório. Os testes usam dados fictícios e rodam sem rede.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Baixar e testar</h3>
+    <p>Os 10 testes conferem a leitura das tabelas, a retro, o gancho e a integração com o SIL.</p>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/agente-que-aprende.git</span> && <span class="k">cd</span> agente-que-aprende
+<span class="k">python3</span> -m unittest discover -s tests -v   <span class="c"># OK</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Ver o que subir de degrau num projeto</h3>
+    <p>Lê as falhas e lições do projeto e lista o que se repete e ainda é só texto, com o degrau sugerido e as linhas de origem.</p>
+<pre><span class="k">python3</span> degrau.py ~/projetos/meu-app/FALHAS.md ~/projetos/meu-app/LESSONS.md --top 10</pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Passar o jardineiro em todos os projetos</h3>
+    <p>Mede a reincidência (quanto dos registros é o mesmo erro de novo), mostra os erros que "mudaram de casa" e o ranking geral.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --saida jardim/$(date +%F).md</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Fazer a retro de uma sessão</h3>
+    <p>Aponte para o arquivo da sessão (as mais recentes: <code>ls -t ~/.claude/projects/*/*.jsonl | head -3</code>). <code>--pergunta</code> acrescenta o pedido de retro para colar no agente ("o que deu errado aqui?").</p>
+<pre><span class="k">python3</span> retro.py ~/.claude/projects/<span class="s">&lt;pasta&gt;</span>/<span class="s">&lt;id&gt;</span>.jsonl --pergunta
+<span class="k">python3</span> retro.py ~/.codex/sessions/<span class="s">&lt;aaaa/mm/dd&gt;</span>/rollout-<span class="s">&lt;…&gt;</span>.jsonl   <span class="c"># Codex também</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Transformar uma lição em gancho</h3>
+    <p>Um item a mais na lista do <code>ganchos.json</code> (separado por vírgula): o padrão do comando errado, a exceção (opcional), a mensagem e de onde veio a lição. Para não mexer no arquivo do kit, use um arquivo seu em <code>AQA_GANCHOS=/caminho/meus.json</code>. Teste antes de ligar o passo 6: o gancho só barra quando o comando é executado, não quando é citado num texto ou num grep.</p>
+<pre>{"id": "pkill-f", "ferramenta": "Bash", "padrao": "\\bpkill\\b[^|;&amp;]*\\s-f\\b",
+ "mensagem": "Liste com pgrep -af e mate por PID em outro comando.", "origem": "FALHAS (7x)"}
+
+<span class="k">echo</span> <span class="s">'{"tool_name":"Bash","tool_input":{"command":"pkill -f x"}}'</span> | <span class="k">python3</span> gancho.py; <span class="k">echo</span> $?   <span class="c"># 2 = bloqueado</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Ligar no Claude Code</h3>
+    <p>No <code>~/.claude/settings.json</code>: o gancho antes de cada comando Bash e a retro quando a sessão fecha (relatórios em <code>~/.local/share/agente-que-aprende/retro/</code>, só quando houve correção ou erro repetido).</p>
+<pre>"hooks": {
+  "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "python3 /caminho/agente-que-aprende/gancho.py"}]}],
+  "SessionEnd": [{"hooks": [{"type": "command", "command": "bash /caminho/agente-que-aprende/hooks/fim-de-sessao.sh"}]}]
+}</pre>
+  </div></div>
+
+  <div class="step"><div class="b">7</div><div>
+    <h3>Jardineiro toda semana</h3>
+    <p>Copie o timer e, em <code>jardineiro.service</code>, troque <code>KIT</code> (onde está o kit), <code>SAIDA</code> (onde salvar os relatórios) e o <code>--raiz %h/projetos</code> (onde ficam seus projetos). Toda segunda às 07:30 sai um relatório novo.</p>
+<pre><span class="k">cp</span> modelos/systemd/jardineiro.{service,timer} ~/.config/systemd/user/
+<span class="k">systemctl</span> --user daemon-reload && <span class="k">systemctl</span> --user enable --now jardineiro.timer</pre>
+  </div></div>
+
+  <div class="step"><div class="b">8</div><div>
+    <h3>Mandar as propostas para o SIL (opcional)</h3>
+    <p>Com o SIL instalado e iniciado no projeto (ver Pré-requisitos), os 5 primeiros candidatos viram ocorrência + lição proposta no SIL Loop R. Nada é adotado sem você.</p>
+<pre><span class="k">python3</span> jardineiro.py --raiz ~/projetos --sil ~/projetos/meu-app</pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Exemplos</span>
+  <h2>O que ele achou na primeira passada</h2>
+  <p class="sub">Rodado nos registros reais do INEMA em 07/11/2026: 196 arquivos de falhas e lições, 1.880 registros, em menos de 1 segundo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>10% é o mesmo erro de novo</h3><p>180 registros em 84 grupos de repetição; 57 grupos atravessam projetos — o erro só mudou de casa.</p></div>
+    <div class="card"><h3>pkill -f: 7× em 6 projetos</h3><p>Matar processo pelo padrão matava o próprio shell. Cada vez virou uma linha de texto. Agora é o gancho <code>pkill-f</code>: o comando é barrado na hora, com o jeito certo na mensagem.</p></div>
+    <div class="card"><h3>"Template ausente" 4×</h3><p>O render falhava porque um passo anterior não rodou. Sugestão do kit: arquitetura — a cadeia gera o que falta (<code>modelos/validador-passo.sh</code>).</p></div>
+  </div>
+<pre style="margin-top:18px"><span class="c"># trecho do relatório do jardineiro</span>
+- 196 arquivos em 190 projetos · 1880 registros
+- <strong>reincidência: 10%</strong> (180 registros em 84 grupos de 2+)
+1. pkill -f "&lt;padrão&gt;" no mesmo comando matou o próprio shell — 7× em 6 projetos · texto → <strong>gancho/validador</strong>
+4. produce_blocks caiu (templates/pt/scene-01.html ausente) — 4× · texto → <strong>servidor/arquitetura</strong></pre>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Daqui para a frente</h2>
+  <p class="sub">A medida é uma só: a reincidência semanal tem que cair.</p>
+  <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Retro, degrau, jardineiro e gancho</strong><span>Os quatro scripts, hooks do Claude Code, timer semanal, integração com o SIL Loop R, 10 testes.</span></div></div>
+  <div class="phase"><div class="tag">Próximo</div><div class="d"><strong>Ganchos para o Codex</strong><span>A mesma lista de ganchos aplicada às sessões do Codex.</span></div></div>
+  <div class="phase"><div class="tag">Depois</div><div class="d"><strong>Gráfico da reincidência</strong><span>Histórico dos relatórios semanais numa linha do tempo, para ver se as travas estão funcionando.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python 3</div><div class="pill">Claude Code hooks</div><div class="pill">SIL Loop R</div>
+    <p style="margin-top:18px">agente-que-aprende · kit aberto, licença MIT ·
+      <a href="https://github.com/inematds/agente-que-aprende">inematds/agente-que-aprende</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='agente-que-aprende-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+jardim/
+retro/
+guia/assets/logs/
+guia/assets/*.log
