@@ -12,6 +12,8 @@ agente-que-aprende es un kit de cuatro scripts en Python para quien trabaja con 
 
 Guía completa (landing + paso a paso): **https://inematds.github.io/agente-que-aprende/guia/es/**
 
+🎬 Video: https://www.youtube.com/watch?v=bnLvmYcP4PI
+
 Tu agente de IA comete un error, lo corriges en el chat y, en la siguiente sesión, vuelve a cometerlo. Este kit cierra ese ciclo: encuentra dónde corregiste al agente, detecta el error que vuelve a aparecer (en el mismo proyecto o en otro) y transforma la lección en una **barrera**: un gancho que impide ejecutar el comando, un validador que genera lo que falta o una prueba; en lugar de otra línea de texto que el modelo puede pasar por alto. Funciona con Claude Code y Codex, en Python puro, sin API ni conexión a la red.
 
 

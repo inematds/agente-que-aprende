@@ -12,6 +12,8 @@ agente-que-aprende is a kit of four Python scripts for people who work with AI c
 
 Full guide (landing + step by step): **https://inematds.github.io/agente-que-aprende/guia/en/**
 
+🎬 Video: https://www.youtube.com/watch?v=bnLvmYcP4PI
+
 Your AI agent makes a mistake, you correct it in chat, and in the next session it makes the same mistake again. This kit closes that loop: it finds where you corrected the agent, finds the mistake that keeps recurring (in the same project or another one), and turns the lesson into a **guard** — a hook that blocks the command, a validator that generates what’s missing, or a test — instead of another line of text the model can skip. Works with Claude Code and Codex, in pure Python, with no API and no network.
 
 

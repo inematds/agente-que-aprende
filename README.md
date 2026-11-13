@@ -12,6 +12,8 @@ O agente-que-aprende é um kit de quatro scripts em Python para quem trabalha co
 
 Guia completo (landing + passo a passo): **https://inematds.github.io/agente-que-aprende/guia/**
 
+🎬 Vídeo: https://www.youtube.com/watch?v=bnLvmYcP4PI
+
 O seu agente de IA erra, você corrige no chat, e na sessão seguinte ele erra igual. Este kit fecha esse ciclo: acha onde
 você corrigiu o agente, acha o erro que volta (no mesmo projeto ou em outro) e transforma a lição em **trava** — um
 gancho que impede o comando, um validador que gera o que falta, um teste — em vez de mais uma linha de texto que o modelo
